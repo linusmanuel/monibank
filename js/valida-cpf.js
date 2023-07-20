@@ -1,7 +1,14 @@
 export default function isCPF(campo) {
 	const cpf = campo.value.replace(/\.|-/g, '');
-	console.log(validaNumerosRepetidos(cpf));
-	console.log(verificaPrimeiroDigito(cpf));
+	if (
+		validaNumerosRepetidos(cpf) ||
+		validaPrimeiroDigito(cpf) ||
+		validaSegundoDigito(cpf)
+	) {
+		console.log('CPF não existe', cpf);
+	} else {
+		console.log('CPF existe');
+	}
 }
 
 function validaNumerosRepetidos(cpf) {
@@ -21,12 +28,12 @@ function validaNumerosRepetidos(cpf) {
 	return numerosRepetidos.includes(cpf);
 }
 
-function verificaPrimeiroDigito(cpf) {
+function validaPrimeiroDigito(cpf) {
 	let soma = 0;
 	let multiplicador = 10;
 
 	for (let tamanho = 0; tamanho < 9; tamanho++) {
-		soma = cpf[tamanho] * multiplicador;
+		soma += cpf[tamanho] * multiplicador;
 		multiplicador--;
 	}
 
@@ -36,5 +43,24 @@ function verificaPrimeiroDigito(cpf) {
 		soma = 0;
 	}
 
+	console.log(soma);
 	return soma != cpf[9];
+}
+
+function validaSegundoDigito(cpf) {
+	let soma = 0;
+	let multiplicador = 11;
+	for (let tamanho = 0; tamanho < 10; tamanho++) {
+		soma += cpf[tamanho] * multiplicador;
+		multiplicador--;
+	}
+
+	soma = (soma * 10) % 11;
+
+	if (soma == 10 || soma == 1) {
+		soma = 0;
+	}
+
+	console.log(soma);
+	return soma != cpf[10];
 }
