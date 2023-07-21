@@ -11,8 +11,10 @@ camposDoFormulario.forEach((campo) => {
 function verificaCampo(campo) {
 	if (campo.name == 'cpf' && campo.value.length >= 11) {
 		isCPF(campo);
+		console.log(campo.validaty);
 	}
 	if (campo.name == 'aniversario' && campo.value != '') {
 		ehMaiorDeIdade(campo);
 	}
+	console.log(campo.validity);
 }
