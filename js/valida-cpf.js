@@ -5,9 +5,7 @@ export default function isCPF(campo) {
 		validaPrimeiroDigito(cpf) ||
 		validaSegundoDigito(cpf)
 	) {
-		console.log('CPF não existe', cpf);
-	} else {
-		console.log('CPF existe');
+		campo.setCustomValidity('Esse cpf não é válido');
 	}
 }
 
@@ -43,7 +41,6 @@ function validaPrimeiroDigito(cpf) {
 		soma = 0;
 	}
 
-	console.log(soma);
 	return soma != cpf[9];
 }
 
@@ -61,6 +58,5 @@ function validaSegundoDigito(cpf) {
 		soma = 0;
 	}
 
-	console.log(soma);
 	return soma != cpf[10];
 }

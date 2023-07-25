@@ -49,12 +49,23 @@ const mensagens = {
 };
 
 function verificaCampo(campo) {
+	campo.setCustomValidity('');
+	let mensagem = '';
 	if (campo.name == 'cpf' && campo.value.length >= 11) {
 		isCPF(campo);
-		console.log(campo.validaty);
 	}
 	if (campo.name == 'aniversario' && campo.value != '') {
 		ehMaiorDeIdade(campo);
 	}
-	console.log(campo.validity);
+	tiposDeErros.forEach((erro) => {
+		if (campo.validity[erro]) {
+			mensagem = mensagens[campo.name][erro];
+		}
+	});
+	const messageErro = campo.parentNode.querySelector('.mensagem-erro');
+	const validadorDeInput = campo.checkValidity();
+
+	!validadorDeInput
+		? (messageErro.textContent = mensagem)
+		: (messageErro.textContent = '');
 }
