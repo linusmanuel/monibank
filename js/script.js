@@ -12,9 +12,10 @@ formulario.addEventListener('submit', (e) => {
 		rg: e.target.elements['rg'].value,
 		cpf: e.target.elements['cpf'].value,
 		aniversario: e.target.elements['aniversario'].value,
+		imagem: '',
 	};
 
-	localStorage.setItem('usuario', JSON.stringify(listaRespostas));
+	localStorage.setItem('cadastro', JSON.stringify(listaRespostas));
 	window.location.href = './abrir-conta-form-2.html';
 });
 
